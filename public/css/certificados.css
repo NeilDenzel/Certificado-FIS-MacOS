@@ -1,0 +1,48 @@
+.certificados-generar-certificados{
+    background-color: rgb(6, 132, 164);
+    width: 180px;
+    height: 40px;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    color: white;
+}
+.certificados-div-generar-certificados{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid red 1px;
+    margin: 12px 0;
+}
+
+
+ul .certificados-li{
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ul .certificados-li div{
+    margin: 12px 0;
+}
+ul .certificados-li div{
+    margin: 12px 0;
+}
+ul .certificados-li div span{
+    height: 30px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
+
+
+ul .certificados-li div .certificados-div-span-creado{
+    background-color: rgb(146, 219, 10);
+}
+ul .certificados-li div .certificados-div-span-no-creado{
+    background-color: rgb(255, 65, 65);
+}

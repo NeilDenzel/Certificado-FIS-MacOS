@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Certificado extends Model
 {
@@ -18,4 +19,16 @@ class Certificado extends Model
     ];
 
     protected $hidden = [];
+    public function tipo():BelongsTo
+    {
+        return $this->belongsTo(Tipo::class, 'tipo_id');
+    }
+    public function evento():BelongsTo
+    {
+        return $this->belongsTo(Evento::class, 'evento_id');
+    }
+    public function usuario():BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

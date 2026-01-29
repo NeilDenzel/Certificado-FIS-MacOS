@@ -1,0 +1,30 @@
+ul li{
+    margin: 10px 0;
+}
+ul li a{
+    cursor: pointer;
+}
+
+.dashboard-h1{
+    margin-bottom: 10px; 
+}
+
+
+
+li {
+  padding: 12px 0 12px 25px;
+  transition: background 0.3s ease;
+}
+
+li:hover {
+  background-color: rgb(254, 185, 0);
+  
+  border-radius: 10px;
+}
+
+.dashboard-agregar-evento{
+    padding: 8px;
+    width: fit-content;
+    border-radius: 8px;
+    background-color: rgb(146, 219, 10);
+}
