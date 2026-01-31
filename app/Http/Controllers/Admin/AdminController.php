@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AddEventoRequest;
 use Illuminate\Http\Request;
@@ -16,6 +15,19 @@ use Illuminate\Container\Attributes\Storage;
 use Carbon\Carbon;
 use App\Models\Tipo;
 use Barryvdh\DomPDF\Facade\Pdf;
+use COM;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Writer\ValidationException;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrganizadoresExport;
 
 class AdminController extends Controller
 {
@@ -161,6 +173,21 @@ class AdminController extends Controller
 
         $ruta = storage_path('app/private/certificados/' . $evento->certificado_base);
         $base64 = "data:image/png;base64," . base64_encode(file_get_contents($ruta));
+        $url_certificado = route('documento', ['certificado_id' => $certificado_id]);
+        $qr_code = new QrCode(
+            data: route('documento', ['certificado_id' => $certificado_id]),
+            encoding: new Encoding('UTF-8'),
+            errorCorrectionLevel: ErrorCorrectionLevel::Low,
+            size: 300,
+            margin: 10,
+            roundBlockSizeMode: RoundBlockSizeMode::Margin,
+            foregroundColor: new Color(0, 0, 0),
+            backgroundColor: new Color(255, 255, 255)
+
+        );
+        $writer = new PngWriter();
+        $result = $writer->write($qr_code);
+        $qr_data = $result->getDataUri();
 
         $pdf = PDF::loadView('admin.plantillas.certificado_academico', [
             'evento' => $evento,
@@ -169,8 +196,16 @@ class AdminController extends Controller
             'dia' => $dia,
             'fecha' => $fecha,
             'tipo' => $tipo,
-            'user' => $user
+            'user' => $user,
+            'qr_data' => $qr_data,
+            'url_certificado' => $url_certificado,
         ])->setPaper('a4', 'landscape')->setOption('dpi', 120)->setOption('image_dpi', 300);
         return $pdf->stream('certificado.pdf');
+    }
+    public function exportarOrganizadores($evento_id)
+    {
+        $evento = Evento::findOrFail($evento_id);
+        $organizadores = $evento->organizadores()->select('paternal_surname', 'maternal_surname', 'name', 'email')->get();
+        return Excel::download(new OrganizadoresExport($organizadores), 'organizadores.xlsx');
     }
 }

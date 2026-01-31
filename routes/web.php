@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/add-certificado-base', [AdminController::class, "postAddCertificadoBase"]);
             Route::get('add-organizador', [AdminController::class, "getAddOrganizador"])->name('add-organizador');
             Route::post('/add-organizador', [AdminController::class, "postAddOrganizador"]);
+            Route::get('exportar-Organizadores', [AdminController::class, "exportarOrganizadores"])->name('exportar-organizadores');
             Route::get('/add-ponente', [AdminController::class, "getAddPonente"])->name('add-ponente');
             Route::post('/add-ponente', [AdminController::class, "postAddPonente"]);
             Route::get('/certificados', [AdminController::class, "certificados"])->name('admin-certificados');

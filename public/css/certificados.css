@@ -40,9 +40,9 @@ ul .certificados-li div span{
 }
 
 
-ul .certificados-li div .certificados-div-span-creado{
+ul .certificados-div-span-creado{
     background-color: rgb(146, 219, 10);
 }
-ul .certificados-li div .certificados-div-span-no-creado{
+ul .certificados-div-span-no-creado{
     background-color: rgb(255, 65, 65);
 }

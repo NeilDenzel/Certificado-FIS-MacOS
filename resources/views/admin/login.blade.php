@@ -5,6 +5,10 @@
         <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     </head>
     <div class="div-login">
+        <div class="login-h1-y-p">
+            <h1>Bienvenido</h1>
+            <p>Ingrese su email y contraseña</p>
+        </div>
         <form method="post">
             @csrf
             @isset($error)

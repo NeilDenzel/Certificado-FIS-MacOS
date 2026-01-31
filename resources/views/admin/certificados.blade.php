@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('contenido')
+<head>
+        <link rel="stylesheet" href="{{ asset('css/certificados.css') }}">
+    </head>
     <div>
         <h2>
             Certificados del evento {{ $evento->name }}
@@ -24,14 +27,13 @@
                 @if ($organizador->pivot->certificado_creado)
                     @foreach ($certificados as $certificado)
                         @if ($certificado->tipo_id == 4 && $certificado->user_id == $organizador->id)
-                            <a href="{{ route('documento', ['certificado_id' => $certificado->id]) }}"
-                                target="_blank">
+                            <a href="{{ route('documento', ['certificado_id' => $certificado->id]) }}" target="_blank" class="certificados-div-span-creado">
                                 Ver certificado
                             </a>
                         @endif
                     @endforeach
                 @else
-                    <span>
+                    <span class="certificados-div-span-no-creado">
                         No creado
                     </span>
                 @endif
@@ -61,14 +63,15 @@
                     </div>
                     <div>
                         @if ($p->pivot->certificado_creado)
-                             @foreach ($certificados as $certificado)
-                            @if ($certificado->tipo_id == 3 && $certificado->user_id == $p->id)
-                                <a href="{{ route('documento',['certificado_id' => $certificado->id]) }}" target="_blank">
-                                    Ver certificado
-                                </a>
-                                @break
-                            @endif                    
-                       @endforeach
+                            @foreach ($certificados as $certificado)
+                                @if ($certificado->tipo_id == 3 && $certificado->user_id == $p->id)
+                                    <a href="{{ route('documento', ['certificado_id' => $certificado->id]) }}"
+                                        target="_blank">
+                                        Ver certificado
+                                    </a>
+                                    @break
+                                @endif
+                            @endforeach
                         @else
                             <span>
                                 No creado

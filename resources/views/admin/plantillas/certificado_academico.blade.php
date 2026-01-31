@@ -2,11 +2,11 @@
 <html lang="ee">
 
 <head>
-    
+
     <meta charset="UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
@@ -73,6 +73,14 @@
             font-size: 24px;
             margin-bottom: 5px;
         }
+
+        .qr {
+            position: absolute;
+            bottom: 450px;
+            right: 0px;
+            width: 200px;
+            z-index: 50;
+        }
     </style>
 </head>
 
@@ -81,10 +89,10 @@
     <div class="contenido_certificado">
         <p class="p1">
             Otorgado a:
-            </p>
+        </p>
         <p class="p2">
             {{ $user->paternal_surname }} {{ $user->maternal_surname }} {{ $user->name }}
-            </p>
+        </p>
         <p class="p3">
             Por su destacada participación en calidad de <strong>{{ $tipo->tipo }}</strong> en
             las Conferencias del <strong>{{ $evento->name }}</strong>, que se desarrolló el dia
@@ -92,11 +100,17 @@
             organizado por la Facultad de Ingieria de Sistemas de la Universidad Nacional del centro del
             Perú,
             con una duracion de veinte (20) horas académicas.
-            </p>
+        </p>
         <p class="p4">
             Huancayo, {{ $dia }} de {{ $meses[$fecha->month] }} de {{ $fecha->year }}.
-            </p>
-        </div>
+        </p>
+        <p class="p3">
+            Para la validacion ingresar a la url:
+            <br>
+            {{ $url_certificado }}
+        </p>
+        <img src="{{ $qr_data }}" class="qr">
+    </div>
 
 </body>
 

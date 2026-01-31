@@ -29,7 +29,6 @@ body {
 .todo-el-contenido {
     flex-grow: 1;
     padding: 2vh;
-    display: flex;
 }
 
 hr {

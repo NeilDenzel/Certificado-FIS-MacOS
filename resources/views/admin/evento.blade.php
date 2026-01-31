@@ -22,6 +22,9 @@
         <a href="{{ route('add-organizador', ['evento_id' => $evento_id]) }}">
             Agregar
         </a>
+        <a href="{{ route('exportar-organizadores', ['evento_id' => $evento_id]) }}">
+            Exportar
+        </a>
         <ul>
             @foreach ($organizadores as $organizador)
                 <li>
